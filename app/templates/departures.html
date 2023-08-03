@@ -1,0 +1,72 @@
+<head>
+  <style>
+      table {border: 0.5mm solid black; border-collapse:collapse; text-align: center; width: 100%;}
+      th, td {padding: 2mm;}
+      .main {border: 1mm solid black; width: 1280px; padding: 10mm;
+        margin: auto;}
+      .time {background-color: black; color: white; font-weight: bold;}
+  </style>
+</head>
+
+<body>
+<div class="main" style="background-color: #ffe600; font-family:Verdana">
+<p><b><big>Odjazdy</b></big> / Departures / Відправлення</p>
+<p><h1>{{station_name}}</h1></p>
+{% block content %}
+  <table id="data" class="table table-striped" border="1">
+    <thead style="background-color: rgba(0,0,0,0.2);">
+      <tr>
+        <th style="width: 10%;">Godzina odjazdu <br><i><small>Departure time</small></i></th>
+        <th style="width: 5%;">Peron<br>Tor<br><i><small><small>Platform<br>Track</small></small></i></th>
+        <th style="width: 10%;">Pociąg<br><i><small>Train</small></i></th>
+        <th>Godziny przyjazdów do stacji pośrednich<br><i><small>Arrivals at intermediate stops</small></i></th>
+        <th style="width: 20%;">Godzina przyjazdu do stacji docelowej<br><i><small>Arrival at destination (station)</small></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for route in routes %}
+        {% if route['fast'] == True %}<tr style="color: red;">{% else %}<tr>{% endif %}
+        
+          <td style="background-color: rgba(0,0,0,0.2);"><b><big><big>{{ route['departure_time'] }}</big></big></b></td>
+          <td style="background-color: rgba(0,0,0,0.2);"><b> </b><br> </td>
+          <td><small>{{ route['train_number'] }}<br>{{route['train_name']}}<br>
+            {% if route['info_first_class'] == True %}1 {% endif %}
+            {% if route['info_second_class'] == True %}2 {% endif %}
+            {% if route['info_reservation'] == True %}R {% endif %}
+            {% if route['info_reservation_compulsory'] == True %}[R] {% endif %}
+            {% if route['info_minibar'] == True %}A {% endif %}
+            {% if route['info_restaurant'] == True %}X {% endif %}
+            {% if route['info_sleeping'] == True %}B {% endif %}
+            {% if route['info_couchette'] == True %}C {% endif %}
+            {% if route['info_bicycles'] == True %}E {% endif %}
+          </small></td>
+          <td colspan="2">
+            <div style="text-align: left;"><small>
+            {% for stop in route['intermediate_stops'] %}
+                {{stop['station'].replace(' ','\u00A0')}}&nbsp;{{stop['arrival_time']}}{% if not loop.last %}, {% endif %}
+            {% endfor %}</small></div>
+          <div style="text-align: right;"><b>{{ route['destination']['station'].replace(' ','\u00A0') }}&nbsp;{{route['destination']['arrival_time']}}</b></div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+<div class="legend">
+  <h3>Legenda:</h3>
+  <br>
+  1 - 1 klasa / First class seats / 1 клас<br>
+  2 - 2 klasa / Second class seats / 2 клас<br>
+  R - rezerwacja miejsc / seat booking / бронювання місць<br>
+  ➀ - w poniedziałki / Mondays / по понеділках<br>
+  ➁ - we wtorki / Tuesdays / по вівторках<br>
+  ➂ - w środy / Wednesdays / по середах<br>
+  ➃ - w czwartki / Thursdays / по четвергах<br>
+  ➄ - w piątki / Fridays / по п'ятницях<br>
+  ➅ - w soboty / Saturdays / по суботах<br>
+  ➆ - w niedziele / Sundays / по неділях<br>
+</div>
+
+</div>
+</body>

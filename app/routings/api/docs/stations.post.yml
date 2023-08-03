@@ -1,0 +1,22 @@
+tags:
+  - pets
+summary: Create a new train station
+parameters:
+  - in: body
+    name: station
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+responses:
+  '201':
+    description: Created
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string

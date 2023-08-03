@@ -1,0 +1,39 @@
+<head>
+    <style>
+        body {font-family:Verdana;}
+        table {border: 0.5mm solid black; border-collapse:collapse; text-align: center;}
+        th, td {padding: 1mm;}
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <label for="train_number">Numer pociągu:</label><br>
+        <input type="text" id="train_number" name="train_number"><br>
+        <label for="train_name">Nazwa pociągu:</label><br>
+        <input type="text" id="train_name" name="train_name"><br>
+        <input type="checkbox" id="train_fast" name="train_fast" value="true">
+        <label for="train_fast"> Czy pociąg ma być oznaczony w rozkładzie jako pospieszny?</label><br><br>
+        <label>Dodaj stacje:</label><br>
+        <table id="stops" class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nazwa stacji</th>
+            <th>Godzina przyjazdu</th>
+            <th>Godzina odjazdu</th>
+        </tr>
+        </thead>
+        <tbody style="text-align: center;">
+        {% for i in range(0,32) %}
+        <tr>
+            <td>{{i+1}}. </td>
+            <td><input type="text" id="train_stop_{{i}}_station" name="train_stop_{{i}}_station"></td>
+            <td><input type="time" id="train_stop_{{i}}_arrival" name="train_stop_{{i}}_arrival"></td>
+            <td><input type="time" id="train_stop_{{i}}_departure" name="train_stop_{{i}}_departure"></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+</body>

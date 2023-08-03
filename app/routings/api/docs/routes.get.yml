@@ -1,0 +1,10 @@
+tags:
+  - pets
+summary: Get all train stations
+responses:
+  '200':
+    description: OK
+    schema:
+      type: array
+      items:
+        type: string

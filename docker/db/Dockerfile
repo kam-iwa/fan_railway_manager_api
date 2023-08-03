@@ -1,0 +1,7 @@
+FROM postgres:latest
+
+ENV POSTGRES_USER=docker
+ENV POSTGRES_PASSWORD=docker
+ENV POSTGRES_DB=trains
+
+EXPOSE 5432

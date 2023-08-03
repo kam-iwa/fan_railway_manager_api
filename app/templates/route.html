@@ -1,0 +1,58 @@
+<style>
+    .main {
+        border: 1mm solid black; 
+        margin: auto; 
+        width: 1024px;
+        height: 768px;
+        }
+
+</style>
+
+<body>
+    <div class="main">
+        {% if fast == True %}
+            <div style="font-family:Verdana; font-size: 3em; color:red; height: 10%;">
+        {% else %}
+            <div style="font-family:Verdana; font-size: 3em; color:black; height: 10%;">
+        {% endif %}
+            <div style="float: left;  width: 48%; height: 5%; margin-left: 1%"><b>{{number}}</b></div>
+            <div style="float: right; width: 48%; height: 5%; text-align: right; margin-right: 1%"><b><i>{{name.upper()}}</b></i></div>
+            
+        </div>
+        <div style="height: 5%;">
+            <hr style="width:90%; height:5%; background-color: black;">
+        </div>
+        <div style="height: 85%;">
+            <div style="font-family:Verdana; font-size: 3em; height: 18%; text-align: left; display: flex; justify-content: left; align-items: center; padding-left: 1%;">
+                <b>{{stops[0]['station'].upper().replace(' ','\u00A0')}}</b>
+            </div>
+            <div style="font-family:Verdana; font-size: 2em; height: 60%; text-align: center; display: flex; justify-content: center; align-items: center; padding-left: 1%; padding-right: 1%;">
+                {% for stop in stops[1:-1] %}
+                {{stop['station'].upper().replace(' ','\u00A0')}}&nbsp;{% if not loop.last %}- {% endif %}
+                {% endfor %}
+            </div>
+            <div style="font-family:Verdana; font-size: 3em; height: 18%; text-align: right; display: flex; justify-content: right; align-items: center; padding-right: 1%;">
+                <b>{{stops[-1]['station'].upper().replace(' ','\u00A0')}}</b>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- <body>
+    <div class="main" style="font-family:Verdana; font-size: xx-large; color:red; font-weight: bolder;">
+        <div class="train" style="width: 100%; height: 5%;">
+            <div style="float: left;  width: 48%; height: 10%; margin-left: 1%"><h1>{{number}}</h1></div>
+            <div style="float: right; width: 48%; height: 10%; text-align: right; margin-right: 1%"><h1>{{name.upper()}}</h1></div>
+        </div>
+        <br>
+        <div class="stations" style="width: 80%; height: 15%; color: black; border: 1px solid black; padding:10%">
+            <div><h1 style="height:10%; width: 100%; text-align: left;">{{stops[0]['station']}}</h1></div>
+            <div class="intermediate" style="height:80%;">
+            {% for stop in stops[1:-1] %}
+                {{stop['station']}}
+            {% endfor %}
+            </div>
+            <div><h1 style="float: right; height:10%;">{{stops[-1]['station']}}</h1></div>
+        </div>
+    </div>
+</body> -->

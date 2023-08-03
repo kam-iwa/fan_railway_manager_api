@@ -1,0 +1,12 @@
+tags:
+- pets
+summary: Get a single train station
+parameters:
+  - name: station_name
+    in: path
+    description: Name of the train station to retrieve
+    required: true
+    type: string
+responses:
+  '200':
+    description: OK

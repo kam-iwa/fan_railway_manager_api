@@ -1,0 +1,26 @@
+tags:
+  - pets
+summary: Create a new train station
+parameters:
+  - in: body
+    name: station
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+  - in: query
+    name: create_stops
+    type: boolean
+    description: Create new stop if stop is not exist?
+responses:
+  '201':
+    description: Created
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
