@@ -1,19 +1,32 @@
 tags:
-  - pets
-summary: Create a new train station
+  - routes
+summary: Create a new train route
 parameters:
   - in: body
-    name: station
+    name: payload
     required: true
     schema:
       type: object
       properties:
-        name:
-          type: string
-  - in: query
-    name: create_stops
-    type: boolean
-    description: Create new stop if stop is not exist?
+        data:
+          type: object
+          properties:
+            number:
+              type: string
+              example: "Ex 2137"
+            name:
+              type: string
+              example: "Kremówka"
+            fast:
+              type: boolean
+              example: true
+            stops:
+              type: array
+              example:
+                allOf:
+                  - $ref: '#/definitions/StopKrakow'
+                  - $ref: '#/definitions/StopWadowice'
+
 responses:
   '201':
     description: Created
@@ -24,3 +37,29 @@ responses:
           type: integer
         name:
           type: string
+
+definitions:
+  StopKrakow:
+    type: object
+    properties:
+      station: 
+        type: string
+        example: "Kraków Główny"
+      arrival_time:
+        type: string
+        example: "21:30"
+      departure_time:
+        type: string
+        example: "21:37"
+  StopWadowice:
+    type: object
+    properties:
+      station: 
+        type: string
+        example: "Wadowice"
+      arrival_time:
+        type: string
+        example: "23:07"
+      departure_time:
+        type: string
+        example: "23:12"

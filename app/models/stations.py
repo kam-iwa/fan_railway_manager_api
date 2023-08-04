@@ -8,7 +8,7 @@ class Station(Model):
     lat = DecimalField(null=True)
     lon = DecimalField(null=True)
 
-    station = BooleanField(default=False)
+    is_stop = BooleanField(default=False)
 
     class Meta:
         database = db

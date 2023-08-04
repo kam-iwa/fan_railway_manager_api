@@ -1,10 +1,10 @@
 tags:
-- pets
-summary: Get a single train station
+- routes
+summary: Get a single train route
 parameters:
   - name: route_id
     in: path
-    description: ID of the train station to retrieve
+    description: ID of the train route to retrieve
     required: true
     type: integer
 responses:

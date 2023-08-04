@@ -1,14 +1,13 @@
 from io import BytesIO
 from flask import Blueprint, jsonify, request, render_template, send_file
 from flasgger import swag_from
+from peewee import fn
 import json
 
 from models.routes import Route
 from models.stations import Station
 from models.stops import Stop
-
-route_mod = Blueprint('route', __name__)
-
+from routings.api import route_mod
 
 @route_mod.route('/api/routes', methods=['GET'])
 @swag_from('docs/routes.get.yml')
@@ -38,8 +37,6 @@ def routes_route_id_get(route_id: int):
 @route_mod.route('/api/routes', methods=['POST'])
 @swag_from('docs/routes.post.yml')
 def routes_create():
-    args = request.args
-    create_stops = args.get('create_stops')
 
     data = request.get_json()["data"]
     route = Route.create(**data)
@@ -48,10 +45,9 @@ def routes_create():
     for stop in stops:
         print(stop)
         stop["route"] = route.id
-        if create_stops is None or json.loads(create_stops) == False:
-            station = Station.get(Station.name == stop["station"])
-        else:
-            station = Station.get_or_create(Station.name == stop["station"])
+        station = Station.get_or_none(fn.lower(Station.name) == fn.lower(fn.trim(station.name)))
+        if station is None:
+            return jsonify({'error': 'Station not found.'})
         
         stop["station"] = station.id
         Stop.create(**stop)

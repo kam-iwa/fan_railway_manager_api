@@ -1,6 +1,6 @@
 tags:
-  - pets
-summary: Get all train stations
+  - routes
+summary: Get all train routes
 responses:
   '200':
     description: OK

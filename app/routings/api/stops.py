@@ -3,8 +3,8 @@ from flask import Blueprint, jsonify, request
 from models.stations import Station
 from models.stops import Stop
 from models.routes import Route
+from routings.api import stop_mod
 
-stop_mod = Blueprint('stop', __name__)
 
 @stop_mod.route('/stops', methods=['GET'])
 def stops_get():

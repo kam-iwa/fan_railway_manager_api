@@ -1,4 +1,4 @@
-from peewee import Model, AutoField, ForeignKeyField, TimeField
+from peewee import Model, AutoField, ForeignKeyField, TimeField, IntegerField
 
 from models.stations import Station
 from models.routes import Route
@@ -10,10 +10,9 @@ class Stop(Model):
     route = ForeignKeyField(Route, column_name='route')
     station = ForeignKeyField(Station, column_name='station')
     arrival_time = TimeField()
+    arrival_day = IntegerField(default=0)
     departure_time = TimeField()
-
-    #platform = TextField(null=True)
-    #track = TextField(null=True)
+    departure_day = IntegerField(default=0)
 
     class Meta:
         database = db

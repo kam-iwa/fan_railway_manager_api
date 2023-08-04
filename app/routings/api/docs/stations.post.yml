@@ -1,5 +1,5 @@
 tags:
-  - pets
+  - stations
 summary: Create a new train station
 parameters:
   - in: body

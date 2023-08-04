@@ -61,20 +61,6 @@ def route_add():
         if route_len > 1:
             create_route(route)
 
-
-        # for stop in request.form.get('stops').replace('\r','').split('\n'):
-        #     stop_data = stop.split(',')
-        #     print(stop_data)
-        #     route["stops"].append(
-        #         {
-        #             "station": stop_data[0],
-        #             "arrival_time": stop_data[1],
-        #             "departure_time": stop_data[2]
-        #         }
-        #     )
-        # create_route(route)
-        # print(route)
-
     return render_template('route_add.html')
 
 def create_route(data: dict):
